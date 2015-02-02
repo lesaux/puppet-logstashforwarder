@@ -149,7 +149,12 @@ class logstashforwarder::package {
         ensure   => $package_ensure,
         source   => $pkg_source,
         provider => $pkg_provider
-      }
+      }->
+
+     file { '/etc/init.d/logstash-forwarder':
+       mode    => '0775',
+       source  => 'puppet:///modules/logstashcustom/logstash-forwarder.init',
+     }
 
     }
     default: {
